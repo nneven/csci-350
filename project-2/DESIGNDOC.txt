@@ -1,0 +1,11 @@
+proc.h: created enum mutexstate (line 58) and struct mutex (line 65)
+proc.c: created mtable struct (line 20), added locks to growproc (line 170), implemented kill_all and kill_others (line 249),
+        added locks to exit (line 284), implemented 8 new kthread functions starting at line 655
+exec.c: called kill_others (line 92)
+kthread.h: defined MAX_MUTEXES (line 5) and added kthread_mutex function definitions (line 13)
+sysproc.c: implemented 8 new sys_kthread functions starting at line 81
+syscall.c: added sys_kthread function definitions (line 104) and added into syscall array (line 139)
+syscall.h: added sys_kill_all and sys_kill_others definitions starting at line 32
+usys.S: added SYSCALL(kill_all) and SYSCALL(kill_others) macros at line 41
+user.h: added kill_all and kill_others function definitions at line 37
+defs.h: added kthread and kill function definitions starting at line 121

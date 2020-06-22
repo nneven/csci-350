@@ -1,0 +1,15 @@
+Files modified: syscalls.c/h, proc.c/h, sysproc.c, user.h, usys.S
+
+proc.c: initialized variables for trace, counter, and print.
+
+proc.h: modified proc struct to include int for active trace, int for trace counter and an int for printing to console.
+
+syscall.h: defined a new syscall number for sys_trace, our implemented function.
+
+syscall.c: added external prototype for sys_trace, added sys_trace to the system calls array, created array of system names organized by syscall number.
+
+sysproc.c: added sys_trace function. Trace function tests for invalid syscall nums, sets current process's active trace number depending on input, and if active prints out total number of syscalls, finally returning the trace_counter.
+
+user.h: added user-side function prototype for trace function.
+
+usys.S: added macro entry for trace system call.
