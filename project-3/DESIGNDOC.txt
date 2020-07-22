@@ -1,0 +1,8 @@
+pstat.h: added file to help with stat keeping
+proc.h: added variables to proc struct for stat keeping
+proc.c: changed scheduler() to implement MFQ and added boost method
+defs.h, syscall.h/c, sysproc.c, user.h, usys.S: added getpinfo syscall
+test1.c: shows scheduler functionality by calling fork() and running I/O intensive tasks
+test2.c: shows boosting functionality by calling fork() 10 times and running I/O intensive tasks
+test3.c: shows gaming of MFQ by calling fork() 10 times and also sleep() during I/O intensive tasks
+Makefile: added test1/2/3

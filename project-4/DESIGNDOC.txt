@@ -1,0 +1,32 @@
+mmu.h:	Added shared flag PTE_S.
+trap.c:	Added pagefault as a new type of trap.
+proc.c: Modified procdump() to print out virtual page numbers, physical page numbers, and
+		write flag, Modified fork() to call copy on write function instead of copyuvm().
+
+defs.h: Added definitions for cow() and pagefault().
+
+user.h:
+usys.S:
+sysproc.c:
+syscall.h:
+syscall.c: Added syscall functionality for procdump().
+
+vm.c: Added locks and counters array. Initialize counters array in inituvm() and allocuvm().
+	  Decrement counters array in deallocuvm(). Implemented cow() and pagefault() functions.
+
+Makefile:  Added testcow.c.
+testcow.c: This file tests the copy-on-write fork() ability to defer allocating and copying
+		   physical memory pages for the child until the copies are actually needed. Because
+		   xv6 has a page size of 4096 bytes, testcow calls malloc() to allocate an array in
+		   the heap of size 4096 * 2 bytes. This ensures that the new values sit in different
+		   pages. COW fork() creates a pagetable foe the child with PTEs for user memory
+		   pointing to the parent's physical pages. When it does this, all the user PTE flags
+		   in both parent and child are marked as non-writable. If either the parent or child
+		   attempts to write to one of these pages, a page fault will occur and the kernel
+		   handler allocates a page of physical memory for the faulting proces, copies the
+		   original page into the new page, and modifies the relevant PTE in the faulting
+		   process to refer to the nwe page (marked as writable). When the page-fault handler
+		   returns the user process is able to write its copy of the page. This is how
+		   testcow.c correctly test that COW is implemented correctly. The output shows what
+		   VPN/PPN have their read/shared flag set accurately and if new pages were allocated
+		   for writing.
