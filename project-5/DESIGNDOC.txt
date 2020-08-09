@@ -1,0 +1,5 @@
+Makefile: changed CPUS := 1, added QEMUEXTRA = -snapshot, added testfs.c
+param.h: changed FSSIZE to 20000
+file.h: change size of uint addrs[] in struct inode
+fs.h: define NDOUBLYINDIRECT, change NDIRECT, MAXFILE, and size of uint addrs[]
+fs.c: implement doubly indirect block within bmap() function
